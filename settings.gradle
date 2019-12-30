@@ -1,0 +1,2 @@
+include ':ocb', ':other', ':b2b'
+rootProject.name='CashbagB2BDemo'

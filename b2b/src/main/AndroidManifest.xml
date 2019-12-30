@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="vn.cashbag.b2bdemo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>
