@@ -20,6 +20,8 @@
         </activity>
         <activity
             android:name="vn.cashbag.b2bdemo.WebActivity"
-            android:screenOrientation="portrait" />
+            android:label="Hoàn tiền"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWithActionbar" />
     </application>
 </manifest>

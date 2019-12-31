@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -20,6 +19,8 @@ class WebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_web)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val partnerId = intent.getStringExtra(EXTRA_PARTNER_ID) ?: return
         val name = intent.getStringExtra(EXTRA_NAME) ?: return
@@ -48,6 +49,11 @@ class WebActivity : AppCompatActivity() {
             }
             loadUrl(url)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun generateURL(partnerId: String, name: String): Uri {

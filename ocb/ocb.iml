@@ -35,13 +35,12 @@
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="ocb_debug" />
-          <option name="languageVersion" value="1.3" />
-          <option name="apiVersion" value="1.3" />
           <option name="pluginOptions">
             <array>
               <option value="plugin:org.jetbrains.kotlin.android:experimental=false" />
               <option value="plugin:org.jetbrains.kotlin.android:enabled=true" />
               <option value="plugin:org.jetbrains.kotlin.android:defaultCacheImplementation=hashMap" />
+              <option value="plugin:org.jetbrains.kotlin.android:configuration=rO0ABXelAAAAAwAIZmVhdHVyZXMAAAABAA92aWV3cyxwYXJjZWxpemUAB3BhY2thZ2UAAAABABZ2bi5jYXNoYmFnLmIyYmRlbW8ub2NiAAd2YXJpYW50AAAAAQBObWFpbjsvVXNlcnMvdmluaG5ndXllbi9Xb3Jrc3BhY2VzL2Nhc2hiYWcvYW5kcm9pZC1iMmItZXhhbXBsZS9vY2Ivc3JjL21haW4vcmVz" />
             </array>
           </option>
           <option name="pluginClasspaths">
