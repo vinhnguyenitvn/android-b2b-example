@@ -22,10 +22,10 @@ class WebActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val partnerId = intent.getStringExtra(EXTRA_PARTNER_ID) ?: return
-        val name = intent.getStringExtra(EXTRA_NAME) ?: return
+        val userId = intent.getStringExtra(EXTRA_USER_ID) ?: return
+        val userName = intent.getStringExtra(EXTRA_USER_NAME) ?: return
 
-        val url = generateURL(partnerId, name).toString()
+        val url = generateURL(userId, userName).toString()
 
         findViewById<WebView>(R.id.webView).run {
             settings.javaScriptEnabled = true
@@ -56,7 +56,7 @@ class WebActivity : AppCompatActivity() {
         return true
     }
 
-    private fun generateURL(partnerId: String, name: String): Uri {
+    private fun generateURL(userId: String, userName: String): Uri {
 
         fun String.sha256(): String {
             val md = MessageDigest.getInstance("SHA-256")
@@ -64,28 +64,28 @@ class WebActivity : AppCompatActivity() {
         }
 
         val timestamp = Date().time / 1000 //time in seconds
-        val privateKey = "Q2FzaGJhZy1WaW5pZC1Ub2tlbg=="
-        val tokenString = "$partnerId$name$privateKey$timestamp"
+        val privateKey = "gg97jKG8R12PLO5tRFE23hg09"
+        val tokenString = "$userId$userName$privateKey$timestamp"
         val token = tokenString.sha256()
         return Uri.Builder()
             .scheme("https")
-            .authority("dev-webview.cashbagb2b.vn")
-            .appendQueryParameter("partnerId", partnerId)
-            .appendQueryParameter("name", name)
+            .authority("uat-webview.cashbagb2b.vn")
+            .appendQueryParameter("userId", userId)
+            .appendQueryParameter("userName", userName)
             .appendQueryParameter("timestamp", timestamp.toString())
             .appendQueryParameter("token", token)
             .build()
     }
 
     companion object {
-        const val EXTRA_PARTNER_ID = "PartnerId"
-        const val EXTRA_NAME = "Name"
+        const val EXTRA_USER_ID = "UserId"
+        const val EXTRA_USER_NAME = "UserName"
     }
 }
 
-fun Context.start(partnerId: String, name: String) {
+fun Context.start(userId: String, userName: String) {
     startActivity(Intent(this, WebActivity::class.java).apply {
-        putExtra(WebActivity.EXTRA_PARTNER_ID, partnerId)
-        putExtra(WebActivity.EXTRA_NAME, name)
+        putExtra(WebActivity.EXTRA_USER_ID, userId)
+        putExtra(WebActivity.EXTRA_USER_NAME, userName)
     })
 }

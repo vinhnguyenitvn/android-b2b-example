@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btAction).setOnClickListener {
 
-            val partnerId = findViewById<EditText>(R.id.etPartnerId).text.toString().trim()
-            val name = findViewById<EditText>(R.id.etName).text.toString().trim()
+            val userId = findViewById<EditText>(R.id.etPartnerId).text.toString().trim()
+            val userName = findViewById<EditText>(R.id.etName).text.toString().trim()
 
-            if (partnerId.isNotEmpty() && name.isNotEmpty()) {
-                start(partnerId, name)
+            if (userId.isNotEmpty() && userName.isNotEmpty()) {
+                start(userId, userName)
             }
         }
     }
