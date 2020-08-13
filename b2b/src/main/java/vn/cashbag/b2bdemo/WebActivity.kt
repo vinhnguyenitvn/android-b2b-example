@@ -64,12 +64,12 @@ class WebActivity : AppCompatActivity() {
         }
 
         val timestamp = Date().time / 1000 //time in seconds
-        val privateKey = "gg97jKG8R12PLO5tRFE23hg09"
+        val privateKey = "AG9JKIZsxE0BCMkhgXwrdNuK"
         val tokenString = "$userId$userName$privateKey$timestamp"
         val token = tokenString.sha256()
         return Uri.Builder()
             .scheme("https")
-            .authority("uat-webview.cashbagb2b.vn")
+            .authority("dev-webview.cashbagb2b.com")
             .appendQueryParameter("userId", userId)
             .appendQueryParameter("userName", userName)
             .appendQueryParameter("timestamp", timestamp.toString())
