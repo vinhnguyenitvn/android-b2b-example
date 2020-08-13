@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.webkit.URLUtil
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,10 @@ class WebActivity : AppCompatActivity() {
             webViewClient = object : WebViewClient() {
 
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    if (!URLUtil.isNetworkUrl(url)) {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        return true
+                    }
                     return Uri.parse(url).getQueryParameter("cashback_aff_url")?.let { s ->
                         try {
                             startActivity(Intent(Intent.ACTION_VIEW).apply {
