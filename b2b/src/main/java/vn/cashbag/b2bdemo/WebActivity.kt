@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.webkit.URLUtil
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -25,8 +26,13 @@ class WebActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra(EXTRA_USER_ID) ?: return
         val userName = intent.getStringExtra(EXTRA_USER_NAME) ?: return
+        val host = intent.getStringExtra(EXTRA_HOST)?.let {
+            if (it.isEmpty()) DEFAULT_HOST else it
+        } ?: DEFAULT_HOST
 
-        val url = generateURL(userId, userName).toString()
+        val url = generateURL(userId, userName, host).toString()
+
+        Toast.makeText(this, url, Toast.LENGTH_LONG).show()
 
         findViewById<WebView>(R.id.webView).run {
             settings.javaScriptEnabled = true
@@ -61,7 +67,7 @@ class WebActivity : AppCompatActivity() {
         return true
     }
 
-    private fun generateURL(userId: String, userName: String): Uri {
+    private fun generateURL(userId: String, userName: String, host: String): Uri {
 
         fun String.sha256(): String {
             val md = MessageDigest.getInstance("SHA-256")
@@ -72,9 +78,7 @@ class WebActivity : AppCompatActivity() {
         val privateKey = "AG9JKIZsxE0BCMkhgXwrdNuK"
         val tokenString = "$userId$userName$privateKey$timestamp"
         val token = tokenString.sha256()
-        return Uri.Builder()
-            .scheme("https")
-            .authority("dev-webview.devatcashback.com")
+        return Uri.parse(host).buildUpon()
             .appendQueryParameter("userId", userId)
             .appendQueryParameter("userName", userName)
             .appendQueryParameter("timestamp", timestamp.toString())
@@ -85,12 +89,16 @@ class WebActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_USER_ID = "UserId"
         const val EXTRA_USER_NAME = "UserName"
+        const val EXTRA_HOST = "Host"
+
+        const val DEFAULT_HOST = "https://dev-webview.devatcashback.com"
     }
 }
 
-fun Context.start(userId: String, userName: String) {
+fun Context.start(userId: String, userName: String, host: String?) {
     startActivity(Intent(this, WebActivity::class.java).apply {
         putExtra(WebActivity.EXTRA_USER_ID, userId)
         putExtra(WebActivity.EXTRA_USER_NAME, userName)
+        putExtra(WebActivity.EXTRA_HOST, host)
     })
 }

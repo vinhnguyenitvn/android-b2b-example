@@ -38,8 +38,25 @@
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:gravity="center"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionNext"
         android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Url"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="textUri" />
 
     <Button
         android:id="@+id/btAction"

@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
 
             val userId = findViewById<EditText>(R.id.etPartnerId).text.toString().trim()
             val userName = findViewById<EditText>(R.id.etName).text.toString().trim()
+            val url = findViewById<EditText>(R.id.etUrl).text.toString().trim()
 
             if (userId.isNotEmpty() && userName.isNotEmpty()) {
-                start(userId, userName)
+                start(userId, userName, url)
             }
         }
     }

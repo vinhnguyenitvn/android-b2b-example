@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<View>(R.id.image).setOnClickListener {
-            start("minhtruong", "Minh Truong")
+            start("minhtruong", "Minh Truong", null)
         }
     }
 }
