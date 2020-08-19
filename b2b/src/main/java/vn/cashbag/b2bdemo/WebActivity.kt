@@ -74,7 +74,7 @@ class WebActivity : AppCompatActivity() {
         val token = tokenString.sha256()
         return Uri.Builder()
             .scheme("https")
-            .authority("dev-webview.cashbagb2b.com")
+            .authority("dev-webview.devatcashback.com")
             .appendQueryParameter("userId", userId)
             .appendQueryParameter("userName", userName)
             .appendQueryParameter("timestamp", timestamp.toString())
