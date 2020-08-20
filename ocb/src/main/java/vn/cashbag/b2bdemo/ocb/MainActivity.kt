@@ -3,6 +3,7 @@ package vn.cashbag.b2bdemo.ocb
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import vn.cashbag.b2bdemo.WebActivity
 import vn.cashbag.b2bdemo.start
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<View>(R.id.image).setOnClickListener {
-            start("minhtruong", "Minh Truong", null)
+            start("minhtruong", "Minh Truong", WebActivity.DEFAULT_HOST)
         }
     }
 }

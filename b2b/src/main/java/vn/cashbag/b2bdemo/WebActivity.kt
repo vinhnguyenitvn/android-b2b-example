@@ -26,9 +26,7 @@ class WebActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra(EXTRA_USER_ID) ?: return
         val userName = intent.getStringExtra(EXTRA_USER_NAME) ?: return
-        val host = intent.getStringExtra(EXTRA_HOST)?.let {
-            if (it.isEmpty()) DEFAULT_HOST else it
-        } ?: DEFAULT_HOST
+        val host = intent.getStringExtra(EXTRA_HOST) ?: return
 
         val url = generateURL(userId, userName, host).toString()
 
@@ -95,7 +93,7 @@ class WebActivity : AppCompatActivity() {
     }
 }
 
-fun Context.start(userId: String, userName: String, host: String?) {
+fun Context.start(userId: String, userName: String, host: String) {
     startActivity(Intent(this, WebActivity::class.java).apply {
         putExtra(WebActivity.EXTRA_USER_ID, userId)
         putExtra(WebActivity.EXTRA_USER_NAME, userName)
