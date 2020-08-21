@@ -48,7 +48,6 @@ class WebActivity : AppCompatActivity() {
                             startActivity(Intent(Intent.ACTION_VIEW).apply {
                                 data = Uri.parse(s)
                             })
-                            finish() //close current activity if needed
                         } catch (e: Exception) {
                             //Cannot find any app handle the cashback_aff_url
                         }
