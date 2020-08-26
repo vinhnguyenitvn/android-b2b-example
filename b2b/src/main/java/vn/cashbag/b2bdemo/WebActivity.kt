@@ -5,18 +5,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.webkit.URLUtil
+import android.webkit.JavascriptInterface
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.*
 
 class WebActivity : AppCompatActivity() {
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "AddJavascriptInterface")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,31 +34,12 @@ class WebActivity : AppCompatActivity() {
         else
             generateURL(userId, userName, host).toString()
 
-        Toast.makeText(this, url, Toast.LENGTH_LONG).show()
-
         findViewById<WebView>(R.id.webView).run {
             settings.javaScriptEnabled = true
             settings.javaScriptCanOpenWindowsAutomatically = true
             settings.domStorageEnabled = true
-            webViewClient = object : WebViewClient() {
 
-                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                    if (!URLUtil.isNetworkUrl(url)) {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-                        return true
-                    }
-                    return Uri.parse(url).getQueryParameter("cashback_aff_url")?.let { s ->
-                        try {
-                            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                data = Uri.parse(s)
-                            })
-                        } catch (e: Exception) {
-                            //Cannot find any app handle the cashback_aff_url
-                        }
-                        true
-                    } ?: false
-                }
-            }
+            addJavascriptInterface(JSBridge(this@WebActivity), "JSBridge")
             loadUrl(url)
         }
     }
@@ -66,6 +47,31 @@ class WebActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    class JSBridge(val context: Context) {
+
+        @JavascriptInterface
+        fun sendMessage(message: String) {
+            try {
+                JSONObject(message).apply {
+                    when (opt("type")) {
+                        "open_tel_link" -> {
+                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("tel:${opt("value")}")
+                            })
+                        }
+                        "open_affiliate_link" -> {
+                            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse("${opt("value")}")
+                            })
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun generateURL(userId: String, userName: String, host: String): Uri {
