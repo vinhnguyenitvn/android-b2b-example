@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<View>(R.id.image).setOnClickListener {
-            start("minhtruong", "Minh Truong", WebActivity.DEFAULT_HOST)
+            start("minhtruong", "Minh Truong", WebActivity.DEFAULT_HOST, "")
         }
     }
 }

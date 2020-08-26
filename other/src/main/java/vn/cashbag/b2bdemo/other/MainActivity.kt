@@ -20,9 +20,13 @@ class MainActivity : AppCompatActivity() {
             val userId = findViewById<EditText>(R.id.etPartnerId).text.toString().trim()
             val userName = findViewById<EditText>(R.id.etName).text.toString().trim()
             val host = findViewById<EditText>(R.id.etUrl).text.toString().trim()
+            val token = findViewById<EditText>(R.id.etToken).text.toString().trim()
 
-            if (userId.isNotEmpty() && userName.isNotEmpty() && host.isNotEmpty()) {
-                start(userId, userName, host)
+
+            if (host.isNotEmpty() &&
+                (token.isNotEmpty() || (userId.isNotEmpty() && userName.isNotEmpty()))
+            ) {
+                start(userId, userName, host, token)
             }
         }
     }

@@ -27,8 +27,12 @@ class WebActivity : AppCompatActivity() {
         val userId = intent.getStringExtra(EXTRA_USER_ID) ?: return
         val userName = intent.getStringExtra(EXTRA_USER_NAME) ?: return
         val host = intent.getStringExtra(EXTRA_HOST) ?: return
+        val token = intent.getStringExtra(EXTRA_TOKEN)
 
-        val url = generateURL(userId, userName, host).toString()
+        val url = if (token?.isNotEmpty() == true)
+            generateURL(host, token).toString()
+        else
+            generateURL(userId, userName, host).toString()
 
         Toast.makeText(this, url, Toast.LENGTH_LONG).show()
 
@@ -83,19 +87,27 @@ class WebActivity : AppCompatActivity() {
             .build()
     }
 
+    private fun generateURL(host: String, token: String): Uri {
+        return Uri.parse(host).buildUpon()
+            .appendQueryParameter("token", token)
+            .build()
+    }
+
     companion object {
         const val EXTRA_USER_ID = "UserId"
         const val EXTRA_USER_NAME = "UserName"
         const val EXTRA_HOST = "Host"
+        const val EXTRA_TOKEN = "Token"
 
         const val DEFAULT_HOST = "https://dev-webview.devatcashback.com"
     }
 }
 
-fun Context.start(userId: String, userName: String, host: String) {
+fun Context.start(userId: String, userName: String, host: String, token: String) {
     startActivity(Intent(this, WebActivity::class.java).apply {
         putExtra(WebActivity.EXTRA_USER_ID, userId)
         putExtra(WebActivity.EXTRA_USER_NAME, userName)
         putExtra(WebActivity.EXTRA_HOST, host)
+        putExtra(WebActivity.EXTRA_TOKEN, token)
     })
 }

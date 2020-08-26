@@ -1,67 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:fitsSystemWindows="true">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Partner Id"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/etPartnerId"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="text" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Name"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="text" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Partner Id"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Url"
-        android:textStyle="bold" />
+            <EditText
+                android:id="@+id/etPartnerId"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
 
-    <EditText
-        android:id="@+id/etUrl"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:imeOptions="actionDone"
-        android:inputType="textUri" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Name"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="submit" />
-</LinearLayout>
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Url"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etUrl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="textUri" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Token"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etToken"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:gravity="top"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:padding="5dp" />
+
+            <Button
+                android:id="@+id/btAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="submit" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>
