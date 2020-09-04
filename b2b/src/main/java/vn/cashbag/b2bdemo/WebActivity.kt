@@ -90,12 +90,14 @@ class WebActivity : AppCompatActivity() {
             .appendQueryParameter("userName", userName)
             .appendQueryParameter("timestamp", timestamp.toString())
             .appendQueryParameter("token", token)
+            .appendQueryParameter("sandbox", "1")
             .build()
     }
 
     private fun generateURL(host: String, token: String): Uri {
         return Uri.parse(host).buildUpon()
             .appendQueryParameter("token", token)
+            .appendQueryParameter("sandbox", "1")
             .build()
     }
 
